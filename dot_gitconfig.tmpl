@@ -1,6 +1,6 @@
 [user]
 	name = Tristan Struthers
-    {{- if eq .chezmoi.hostname "symbiote-dev" }}
+    {{- if contains "azure" .chezmoi.kernel.osrelease }}
 	email = trstruthers@microsoft.com
     {{- else }}
     email = tristan.struthers@mail.mcgill.ca
@@ -17,7 +17,7 @@
 	unstage = reset HEAD --
 	nb = checkout -b
 
-{{- if eq .chezmoi.hostname "symbiote-dev" }}
+{{- if contains "azure" .chezmoi.kernel.osrelease }}
 [credential]
 	azreposCredentialType = oauth
 	helper = /usr/local/bin/git-credential-manager
