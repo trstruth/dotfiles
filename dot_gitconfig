@@ -1,0 +1,34 @@
+[user]
+	name = Tristan Struthers
+	email = trstruthers@microsoft.com
+[core]
+	editor = vim
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	ll = pull
+	sh = push
+	unstage = reset HEAD --
+	nb = checkout -b
+
+[credential]
+	azreposCredentialType = oauth
+	helper = /usr/local/bin/git-credential-manager
+	useHttpPath = true
+	interactive = true
+	msauthFlow = devicecode
+	credentialStore = plaintext
+[credential "https://dev.azure.com"]
+	username = trstruthers@microsoft.com
+	useHttpPath = true
+[credential "azrepos:org/mssonic"]
+	username = trstruthers@microsoft.com
+	useHttpPath = true
+
+[credential "azrepos:org/msazure"]
+	azureAuthority = https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47
+	username = trstruthers@microsoft.com
+# [credential "https://github.com"]
+# 	helper = 
