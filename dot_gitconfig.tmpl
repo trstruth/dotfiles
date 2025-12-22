@@ -1,6 +1,10 @@
 [user]
 	name = Tristan Struthers
+    {{- if eq .chezmoi.hostname "symbiote-dev" }}
 	email = trstruthers@microsoft.com
+    {{- else }}
+    email = tristan.struthers@mail.mcgill.ca
+    {{- end }}
 [core]
 	editor = vim
 [alias]
@@ -13,6 +17,7 @@
 	unstage = reset HEAD --
 	nb = checkout -b
 
+{{- if eq .chezmoi.hostname "symbiote-dev" }}
 [credential]
 	azreposCredentialType = oauth
 	helper = /usr/local/bin/git-credential-manager
@@ -30,5 +35,4 @@
 [credential "azrepos:org/msazure"]
 	azureAuthority = https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47
 	username = trstruthers@microsoft.com
-# [credential "https://github.com"]
-# 	helper = 
+{{- end }}
