@@ -130,25 +130,4 @@ export NVM_DIR="$HOME/.nvm"
 export EDITOR=nvim
 export PATH=$HOME/.local/nvim/bin:$HOME/.local/bin:$PATH
 
-# --- Git Credential Manager: headless-friendly session bits ---
-
-# Ensure per-user runtime dir exists & is private (skip creation if not writable)
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
-if [ ! -d "$XDG_RUNTIME_DIR" ]; then
-  if [ -w /run/user ]; then
-    mkdir -p "$XDG_RUNTIME_DIR"
-    chmod 700 "$XDG_RUNTIME_DIR"
-  fi
-fi
-
-# Ensure a user D-Bus session is available
-pgrep -u "$USER" dbus-daemon >/dev/null || export $(dbus-launch)
-
-# Ensure Secret Service (gnome-keyring) is running and its control socket exists
-if ! pgrep -u "$USER" gnome-keyring-daemon >/dev/null || \
-   ! test -S "$XDG_RUNTIME_DIR/keyring/control"; then
-  eval "$(gnome-keyring-daemon --start --components=secrets)"
-fi
-
-
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
