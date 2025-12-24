@@ -115,10 +115,21 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-export PATH=$HOME/go/bin:$PATH
-
 export GCM_CREDENTIAL_STORE=plaintext
+
+# PATH setup: add user bins once, keep ordering predictable.
+path_prepend() {
+  case ":$PATH:" in
+    *":$1:"*) return 0 ;;
+  esac
+  PATH="$1:$PATH"
+}
+
+path_prepend "$HOME/go/bin"
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.local/nvim/bin"
+export PATH
+unset -f path_prepend
 
 # nvim
 export EDITOR=nvim
-export PATH=$HOME/.local/nvim/bin:$HOME/.local/bin:$PATH
