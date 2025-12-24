@@ -133,3 +133,8 @@ unset -f path_prepend
 
 # nvim
 export EDITOR=nvim
+
+# Auto-start tmux for interactive shells when not already inside a session.
+if [ -z "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
+  exec tmux
+fi
