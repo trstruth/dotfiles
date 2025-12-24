@@ -5,7 +5,6 @@ return {
 
     dependencies = {
       "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "nvim-telescope/telescope.nvim",
     },
@@ -75,15 +74,6 @@ return {
       -- Mason setup
       ---------------------------------------------------------------------------
       require("mason").setup()
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "rust_analyzer",
-          "gopls",
-          "tsserver",
-          "bufls",
-        },
-        automatic_installation = true,
-      })
 
       local util = require("lspconfig.util")
 
