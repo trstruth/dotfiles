@@ -1,20 +1,32 @@
 return {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
     config = function()
-        require("nvim-treesitter.configs").setup({
-            highlight = { enable = true },
-            indent = { enable = true },
-            -- Ensure parsers for languages you work with so function/method
-            -- nodes can be highlighted by Tree-sitter too.
-            ensure_installed = {
+        local parsers = {
+            "lua", "vim", "markdown", "c",
+            "go", "gomod", "gowork", "rust",
+            -- TS/JS
+            "javascript", "typescript", "tsx", "jsdoc",
+            -- Proto
+            "proto",
+        }
+
+        require("nvim-treesitter").install(parsers)
+
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = {
                 "lua", "vim", "markdown", "c",
                 "go", "gomod", "gowork", "rust",
-                -- TS/JS
-                "javascript", "typescript", "tsx", "jsdoc",
-                -- Proto
+                "javascript", "javascriptreact",
+                "typescript", "typescriptreact",
+                "jsdoc",
                 "proto",
             },
+            callback = function()
+                vim.treesitter.start()
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end,
         })
 
         -- For Neovim versions where Tree-sitter highlighting can be overridden
