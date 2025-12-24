@@ -7,3 +7,5 @@ height = 0
 lines = 8
 
 mode = drun
+
+allow_images = true
