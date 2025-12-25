@@ -1,0 +1,9 @@
+{{- if eq .chezmoi.hostname "saturn" }}
+monitor = desc:BNQ ZOWIE XL2546X EBX7R02360SL0, 1920x1080@239.96, 0x0, 1
+monitor = desc:AU Optronics 0x323D, 1920x1080@60.05, 1920x0, 1
+{{- else }}
+monitor = desc:Lenovo Group Limited T27hv-20 V309ZLXF, 2560x1440@74.78, 0x0, 1, transform, 1
+monitor = desc:ASUSTek COMPUTER INC XG32UCWG T8LMQV008283, 3840x2160@164.99, 1440x0, 1.25
+# here, 4512 == 1440 + (3840 / 1.25)
+monitor = desc:BNQ ZOWIE XL2546X EBX7R02360SL0, 1920x1080@239.96, 4512x0, 1
+{{- end }}

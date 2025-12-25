@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.hostname "saturn" }}
+# DisplayLink outputs can fail to render with atomic/modifiers enabled.
+env = WLR_DRM_NO_ATOMIC,1
+env = WLR_DRM_NO_MODIFIERS,1
+{{- end }}
