@@ -147,6 +147,27 @@ return {
       })
 
       ---------------------------------------------------------------------------
+      -- zls (Zig Language Server)
+      ---------------------------------------------------------------------------
+      local mason_zls = vim.fn.stdpath("data") .. "/mason/bin/zls"
+      local zls_exec = (vim.fn.executable(mason_zls) == 1) and mason_zls or "zls"
+
+      vim.lsp.config["zls"] = {
+        cmd = { zls_exec },
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = { "zig" },
+        root_dir = util.root_pattern("build.zig", "build.zig.zon", ".git"),
+      }
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "zig",
+        callback = function(args)
+          vim.lsp.start(vim.lsp.config["zls"], { bufnr = args.buf })
+        end,
+      })
+
+      ---------------------------------------------------------------------------
       -- TypeScript/JavaScript (Node) — typescript-language-server (tsserver)
       ---------------------------------------------------------------------------
       -- Prefer Mason installation if present
