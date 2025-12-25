@@ -1,0 +1,33 @@
+[global]
+# format and typography
+markup = yes
+format = "<b>%a</b> %b"
+font = "SF Mono 10"
+line_height = 2
+
+# text options
+alignment = left
+vertical_alignment = center
+word_wrap = yes
+ignore_newline = no
+
+# layout
+width = 360
+padding = 18
+gap_size = 8
+# separator_height = 10
+
+# position
+origin = "top-right"
+offset = (10, 2)
+
+# shape
+corners = "all"
+corner_radius = 12
+frame_width = 1
+
+# colors
+background = "#DDDDDD88"
+foreground = "#1C1C1C"
+frame_color = "#00000000"
+separator_color = "#00000000"
