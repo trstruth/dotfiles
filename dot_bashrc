@@ -144,3 +144,4 @@ export HYPRSHOT_DIR=$HOME/Pictures/Screenshots
 if [ -z "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
   exec tmux
 fi
+. "$HOME/.cargo/env"
