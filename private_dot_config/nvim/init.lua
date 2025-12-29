@@ -108,6 +108,21 @@ vim.keymap.set("n", "<leader>x", "<cmd>wq<CR>", { desc = "Save and quit" })
 -- Force quit (close without saving)
 vim.keymap.set("n", "<leader>Q", "<cmd>q!<CR>", { desc = "Force quit" })
 
+-- Default color column at 100
+vim.opt.colorcolumn = { "100" }
+
+-- Toggle color column at 100
+local function toggle_colorcolumn()
+    local cols = vim.opt.colorcolumn:get()
+    if #cols == 0 then
+        vim.opt.colorcolumn = { "100" }
+    else
+        vim.opt.colorcolumn = {}
+    end
+end
+
+vim.keymap.set("n", "<leader>cc", toggle_colorcolumn, { desc = "Toggle color column (100)" })
+
 -- LSP
 -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })

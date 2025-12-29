@@ -68,6 +68,33 @@ return {
         map("gr", function()
           tb.lsp_references({ initial_mode = "normal" })
         end, "LSP: references")
+
+        if client.name == "rust_analyzer" then
+          local function rust_expand_macro()
+            local params = vim.lsp.util.make_position_params()
+            vim.lsp.buf_request(bufnr, "rust-analyzer/expandMacro", params, function(err, result)
+              if err then
+                vim.notify("rust-analyzer macro expansion failed: " .. err.message, vim.log.levels.ERROR)
+                return
+              end
+              if not result or not result.expansion then
+                vim.notify("No macro expansion available here", vim.log.levels.WARN)
+                return
+              end
+
+              local lines = vim.split(result.expansion, "\n", { plain = true })
+              local buf = vim.api.nvim_create_buf(false, true)
+              vim.api.nvim_buf_set_name(buf, "rust-analyzer://macro-expansion")
+              vim.api.nvim_buf_set_option(buf, "filetype", "rust")
+              vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
+              vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+              vim.cmd("tabnew")
+              vim.api.nvim_win_set_buf(0, buf)
+            end)
+          end
+
+          map("<leader>em", rust_expand_macro, "Rust: expand macro")
+        end
       end
 
       ---------------------------------------------------------------------------
