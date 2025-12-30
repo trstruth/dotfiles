@@ -25,8 +25,8 @@ if (( ${#monitors[@]} == 0 )); then
 fi
 
 {
-  printf 'ipc = off\n'
-  printf 'preload = %s\n' "$wallpaper_path"
+  printf 'ipc = true\n'
+  printf 'splash = false\n'
 
   for monitor in "${monitors[@]}"; do
     printf 'wallpaper {\n'
