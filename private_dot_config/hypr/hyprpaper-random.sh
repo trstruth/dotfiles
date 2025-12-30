@@ -10,15 +10,31 @@ wallpaper_path="$(
   \) -print | shuf -n 1
 )"
 
+mapfile -t monitors < <(
+  hyprctl monitors -j | jq -r '.[] | .name // empty'
+)
+
 if [[ -z "${wallpaper_path}" ]]; then
   printf 'No wallpapers found in %s\n' "$wallpaper_dir" >&2
   exit 1
 fi
 
-cat > "$config_path" <<EOF
-ipc = off
-preload = ${wallpaper_path}
-wallpaper = ,${wallpaper_path}
-EOF
+if (( ${#monitors[@]} == 0 )); then
+  printf 'No monitors detected via hyprctl\n' >&2
+  exit 1
+fi
+
+{
+  printf 'ipc = off\n'
+  printf 'preload = %s\n' "$wallpaper_path"
+
+  for monitor in "${monitors[@]}"; do
+    printf 'wallpaper {\n'
+    printf '  monitor = %s\n' "$monitor"
+    printf '  path = %s\n' "$wallpaper_path"
+    printf '  fit_mode = cover\n'
+    printf '}\n'
+  done
+} > "$config_path"
 
 exec hyprpaper
