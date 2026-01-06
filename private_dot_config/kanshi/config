@@ -3,3 +3,9 @@ profile work {
   output DP-5 mode 2560x1440@59.95 position 1920,0 scale 1
   output DP-7 mode 2560x1440@59.95 position 4480,0 scale 1 transform 90
 }
+
+profile home {
+  output "Lenovo Group Limited T27hv-20 V309ZLXF" mode 2560x1440@74.78 position 0,0 scale 1 transform 90
+  output "ASUSTek COMPUTER INC XG32UCWG T8LMQV008283" mode 3840x2160@164.99 position 2560,0 scale 1.25
+  output "BNQ ZOWIE XL2546X EBX7R02360SL0" mode 1920x1080@239.96 position 6400,0 scale 1
+}
